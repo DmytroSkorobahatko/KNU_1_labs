@@ -8,7 +8,7 @@ def main():
         x = float(input("Enter x: "))
         res = _calculations_(x)
         print(f"done\nfor x = {x:.8f}")
-        print(f"result = {res:.8f}") if res is float else print(f"result = {res}")
+        print(f"result = {res:.08f}") if type(res) is float else print(f"result = {res}")
     except ValueError:
         print("wrong input")
     except KeyboardInterrupt:
@@ -43,9 +43,8 @@ def _domain_(x: float) -> bool:
 
 def f(x: float) -> float:
     """returns value of my variant"""
-    return math.cos(25 / 58) - ((15 * math.e) / (54 * math.pi)) * (9 / (x - 11) * (x + 8)) - 12 * math.atan(
-        x + 14) - (5 + math.sqrt(x + 7)) / (x - 13)
-
+    return (math.cos(25 / 58)) - (15 * math.e) / (54 * math.pi) * 9 / ((x - 11) * (x + 8)) - (12 * math.atan(
+        x + 14)) - ((5 + math.sqrt(x + 7)) / (x - 13))
 
 """program starts here"""
 if __name__ == '__main__':
