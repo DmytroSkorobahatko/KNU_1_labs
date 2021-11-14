@@ -1,6 +1,6 @@
 import math
 
-a, b = -0.9, 0.9
+A, B = -0.9, 0.9
 
 
 def main():
@@ -48,7 +48,7 @@ def _calculations_(x: float, eps: float) -> float:
 
 def _domain_x_(x: float):
     """domain for x"""
-    return a <= x <= b
+    return A <= x <= B
 
 
 def _domain_eps_(eps: float):
