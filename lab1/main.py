@@ -19,9 +19,9 @@ def main():
 
 def _introduction_():
     """prints author name and variant"""
-    author_name, variant = 'Dmytro Skorobahatko', 24
-    print('The author of this program is %s.' % author_name,
-          'This program calculates the value of the lab1 by given x. Variant %d.' % variant,
+    author_name, variant = "Dmytro Skorobahat'ko", 24
+    print(f'The author of this program is {author_name}.',
+          f'This program calculates the value of the lab1 by given x. Variant {variant}.',
           '{x | x >= -7, x != -8, 11, 13}', sep='\n')
 
 
@@ -45,6 +45,7 @@ def f(x: float) -> float:
     """returns value of my variant"""
     return (math.cos(25 / 58)) - (15 * math.e) / (54 * math.pi) * 9 / ((x - 11) * (x + 8)) - (12 * math.atan(
         x + 14)) - ((5 + math.sqrt(x + 7)) / (x - 13))
+
 
 """program starts here"""
 if __name__ == '__main__':
