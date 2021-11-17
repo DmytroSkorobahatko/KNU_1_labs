@@ -61,12 +61,12 @@ def _domain_eps_(eps: float) -> bool:
 def s(x: float, eps: float) -> float:
     """calculates series that depends on x with precision eps"""
     x4 = x * x * x * x
-    a = x
+    a = x4 * x * x * x / 21
     s = a
     n = 1
     m_eps = eps * -1
     while a >= eps or a <= m_eps:
-        a *= (-1 * x4) / ((4 * n + 7) / (4 * n - 1))
+        a *= ((-1 * x4) * (16 * n * n + 8 * n - 3)) / (16 * n * n + 40 * n + 21)
         s += a
         n += 1
     else:
