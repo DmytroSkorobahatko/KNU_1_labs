@@ -1,33 +1,19 @@
-import numpy as np
+"""
+The author of this program is Dmytro Skorobahat'ko
+This program for lab3. Variant 24
+"""
 
 
 def main():
     """catches excepts, calls introduction and some stuff"""
-    _intro_()
-    try:
-        input_str = input("Enter some numbers:")
-        sequence = _get_sequence_(input_str)
-        sequence = _delete_trash_(sequence)
-        answer = parna_plytka(sequence)
-        print("parna_plytka: ", answer)
-    except ValueError:
-        print("***** error")
-    except KeyboardInterrupt:
-        print("program aborted")
-    except EOFError:
-        print("***** error")
-    else:
-        print("The work is done.")
+    #input_str = input()
+    sequence = _get_sequence_(input_str)
+    sequence = _delete_trash_(sequence)
+
+    answer = subsequence(sequence)
 
 
-def _intro_():
-    """prints author name and variant"""
-    author_name, variant = "Dmytro Skorobahat'ko", 24
-    print(f'The author of this program is {author_name}.',
-          f'This program for lab3. Variant {variant}.', sep='\n')
-
-
-def parna_plytka(sequence):
+def subsequence(sequence):
     """looks for First MaxLen parna plytka in string"""
     ans, temp = [], []
     pre_n = sequence[0]
@@ -35,17 +21,22 @@ def parna_plytka(sequence):
     for i in range(len(sequence)):
         temp.append(sequence[i])
 
-        if i + 1 % 2 == 0 and sequence[i] > pre_n:
+        if i % 2 == 0 and sequence[i] > pre_n:
             temp = [sequence[i]]
-        elif i + 1 % 2 == 1 and sequence[i] < pre_n:
+        if i % 2 == 1 and sequence[i] < pre_n:
             temp = [sequence[i]]
 
         if len(ans) < len(temp):
             ans = []
             [ans.append(x) for x in temp]
 
-    if ans[-2] < ans[-1]:
+        pre_n = sequence[i]
+
+    if len(ans) < 2:
+        ans = []
+    elif ans[-2] < ans[-1]:
         ans.pop()
+
     return ans
 
 
@@ -59,19 +50,29 @@ def _get_sequence_(input_str):
 
 def _delete_trash_(sequence):
     """removes a number without odd digit"""
+    new_sequence = []
     for num in sequence:
-        num_base7 = np.base_repr(num, base=7)
-        if not _odd_digits_check_(num_base7):
-            sequence.remove(num)
-    return sequence
+        not_odd = 0
+
+        num_base7 = int(_convert_(num))
+        for digit in str(num_base7):
+            if int(digit) % 2 == 0:
+                not_odd += 1
+        if not_odd != len(str(num_base7)):
+            new_sequence.append(num)
+    return new_sequence
 
 
-def _odd_digits_check_(num7):
-    """checks if in num_base7 at list one odd digit"""
-    for digit in str(num7):
-        if int(digit) % 2 == 1:
-            return True
-    return False
+def _convert_(num, base=7):
+    alpha = "0123456789"
+    converted = ""
+    while num > 0:
+        converted += alpha[num % base]
+        num //= base
+
+    if len(converted) == 0:
+        return "0"
+    return converted[::-1]
 
 
 """program starts here"""
