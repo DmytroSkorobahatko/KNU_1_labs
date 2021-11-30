@@ -4,12 +4,12 @@ This program for lab3. Variant 24
 """
 
 
-def subsequence(tuple_sequence):
+def subsequence(tuple_sequence: tuple) -> list:
     """calls some stuff"""
     return _plytka_(tuple_sequence)
 
 
-def _plytka_(sequence):
+def _plytka_(sequence: tuple):
     """looks for First MaxLen parna plytka in string"""
     ans, temp = [], []
     pre_n = sequence[0]
@@ -44,7 +44,7 @@ def _not_trash_(num: int):
     not_odd = 0
     if num < 0:
         num *= -1
-    num_base7 = int(_convert_(num))
+    num_base7 = _convert_(num)[0]
 
     for digit in str(num_base7):
         if int(digit) % 2 == 0:
@@ -52,13 +52,12 @@ def _not_trash_(num: int):
     return not_odd != len(str(num_base7))
 
 
-def _convert_(num, base=7):
-    """convert num to base 7"""
-    alpha = "0123456789"
-    converted = ""
-    while num > 0:
-        converted += alpha[num % base]
+def _convert_(num: int, base=7):
+    """convert num to base 7 or any other"""
+    if num == 0:
+        return [0]
+    digits = []
+    while num:
+        digits.append(int(num % base))
         num //= base
-    if len(converted) == 0:
-        return "0"
-    return converted[::-1]
+    return digits[::-1]
