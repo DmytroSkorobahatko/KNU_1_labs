@@ -6,7 +6,7 @@ This program for lab3. Variant 24
 
 def subsequence(tuple_sequence: tuple) -> list:
     """calls some stuff"""
-    return _plytka_(tuple_sequence)
+    return _plytka_(tuple_sequence) if len(tuple_sequence) > 1 else []
 
 
 def _plytka_(sequence: tuple):
@@ -24,7 +24,7 @@ def _plytka_(sequence: tuple):
 
             if len(ans) < len(temp):
                 ans = []
-                [ans.append(x) for x in temp]
+                ans.extend(temp)
 
             pre_n = sequence[i]
     return _parna_(ans)
@@ -41,15 +41,14 @@ def _parna_(sequence):
 
 def _not_trash_(num: int):
     """check if num include odd digits"""
-    not_odd = 0
     if num < 0:
         num *= -1
     num_base7 = _convert_(num)[0]
 
-    for digit in str(num_base7):
-        if int(digit) % 2 == 0:
-            not_odd += 1
-    return not_odd != len(str(num_base7))
+    while (num_base7 % 10) % 2 == 0 and num_base7 > 0:
+        num_base7 //= 10
+
+    return (num_base7 % 10) % 2 != 0
 
 
 def _convert_(num: int, base=7):
